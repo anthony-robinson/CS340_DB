@@ -7,7 +7,7 @@ addButton.addEventListener('click', function(event){
     if(roomID.length === 0){
         //write code to show error
         document.getElementById('output').textContent = 'roomID cannot be null';
-        document.getElemetnById('output').classList.remove('hidden'); 
+        document.getElementById('output').classList.remove('hidden'); 
         return;
     }
     if(document.getElementById("gridRadios1").checked) {
@@ -31,7 +31,7 @@ addButton.addEventListener('click', function(event){
     req.addEventListener('load', function(){
         if(req.status >= 200 && req.status < 400){
             console.log("Insert done.");
-            query(); //not sure what this is
+            getData(); //not sure what this is
         } else {
             //display error message
             document.getElementById('output').textContent = 'Error in network request' ;
@@ -48,6 +48,4 @@ addButton.addEventListener('click', function(event){
     );
 });
 
-function query(){
-    
-}
+function getData();
