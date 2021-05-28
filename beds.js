@@ -7,7 +7,7 @@ addButton.addEventListener('click', function(event){
     if(roomID.length === 0){
         //write code to show error
         document.getElementById('output').textContent = 'roomID cannot be null';
-        document.getElemetnById('output').classList.remove('hidden'); 
+        document.getElementById('output').classList.remove('hidden'); 
         return;
     }
     if(document.getElementById("gridRadios1").checked) {

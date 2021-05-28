@@ -1,6 +1,10 @@
 const express = require('express');
+const { nextTick } = require('node:process');
 const app = express();
+const mysql = require('./dbcon.js');
 const port = 52183;
+
+const getBeds = `SELECT bed `;
 
 app.use(express.static('./index.html'));
 
@@ -12,8 +16,19 @@ app.get('/index.html', (req, res) =>{
     res.sendFile('./index.html', {root: __dirname})
 })
 
-app.get('/beds.html', (req,res)=>{
-    res.sendFile('./beds.html', {root: __dirname})
+app.get('/beds', (req,res) =>{
+    let context = {};
+    mysql.pool.query(getBeds, function(err, rows){
+        if(err){
+            console.log(err);
+            next(err);
+            return;
+        }
+        context.results = JSON.stringify(rows);
+        res.type('json');
+        res.send(context.results)
+    })
+    res.send('/beds');
 });
 
 app.get('/customers.html', (req,res)=>{
