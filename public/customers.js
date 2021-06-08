@@ -197,7 +197,7 @@ fetchData();
 
                 let hidden = document.createElement('input');
                 hidden.type = "hidden";
-                hidden.id = "delete" + insertId;
+                hidden.id = "delete" + i;
                 
                 deleteData.appendChild(deleteBtn);
                 deleteData.appendChild(hidden);
