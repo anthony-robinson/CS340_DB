@@ -63,7 +63,7 @@ function query(){
     let row, cell, deleteBtn, editBtn, form;
     for(i = 0; i<response.length; i++) {
        row = document.createElement("tr");
-       for(j = 0; j<6; j++) {
+       for(j = 0; j<5; j++) {
           cell = document.createElement("td");
           cell.textContent = response[i][properties[j]];
           row.appendChild(cell);
