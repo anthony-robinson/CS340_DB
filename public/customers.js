@@ -38,6 +38,7 @@ let form = document.getElementById('customersForm'); //for post request
 async function fetchData(){
     const res = await fetch(baseURL);
     const data = await res.json(); //returns a promise resolved to a JSON object
+    buildtable(data);
     //waits until request completes
     //return the response/ do something with response data.
     return res;
