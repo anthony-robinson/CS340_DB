@@ -10,7 +10,7 @@ app.use(express.json());
 
 //Reservations
 const selectReservations = `SELECT * FROM Reservations;`;
-const insertReservations = `INSERT into Reservations (resDate, checkInDate, checkOutDate, nights) VALUES(?);`
+const insertReservations = `INSERT into Reservations (customerID, bedID, resDate, checkInDate, checkOutDate, nights) VALUES(?);`
 
 //Customers
 const selectCustomers =  `SELECT customerID, email, firstName, lastName, phone, student, genderRoom FROM Customers;`
@@ -20,7 +20,7 @@ const deleteCustomers = `DELETE FROM Customers WHERE customerID = ? AND firstNam
 
 //Beds
 const selectBeds =  `SELECT * FROM Beds;`;
-const insertBeds = `INSERT INTO Beds(bedSize, bedPrice, bedDiscount) VALUES(?);`;
+const insertBeds = `INSERT INTO Beds(roomID, bedSize, bedPrice, bedDiscount) VALUES(?);`;
 
 
 //Rooms
