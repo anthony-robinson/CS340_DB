@@ -26,8 +26,8 @@ const deleteBeds = `DELETE FROM Beds WHERE bedID = ? AND roomID = ?;`;
 
 
 //Rooms
-const selectRooms =  `SELECT roomID, roomName, roomPrice, roomDiscount, roomSize, roomGender;`;
-const insertRooms = `INSERT INTO Beds(bedSize, bedPrice, bedDiscount) VALUES(?, ?, ?);`;
+const selectRooms =  `SELECT * FROM Rooms;`;
+const insertRooms = `INSERT INTO Rooms(roomName, roomPrice, roomDiscount, roomSize, roomGender) VALUES(?);`;
 const deleteRooms = `DELETE FROM Rooms WHERE roomID = ?;`;
 
 //MealsPurchased
@@ -141,21 +141,34 @@ app.get('/meals_purchased', (req,res) =>{
     res.send('/meals_purchased');
 });
 
-/** ROOMS */
-app.get('/rooms', (req,res) =>{
+/**ROOMS*/
+app.get("/rooms", function(req, res, next) {
     let context = {};
-    mysql.pool.query(selectMeals, function(err, rows){
+    mysql.pool.query(selectRooms, function(err, rows){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.stringify(rows);
+    res.type('json');
+    res.send(context.results);
+  });
+});
+
+
+app.post("/rooms", function(req, res, next) {
+    let body = req.body;
+    let data = [[body.roomName, body.roomPrice, body.roomDiscount, body.roomSize, body.roomGender]];
+    mysql.pool.query(insertRooms, data, function(err,rows){
         if(err){
-            console.log(err);
             next(err);
             return;
+        }else{
+            let entry = JSON.stringify(rows)
+            res.send(entry)
         }
-        context.results = JSON.stringify(rows);
-        res.type('json');
-        res.send(context.results)
     })
-    res.send('/rooms');
-});
+  })
 
 app.use(function(req,res,err){
     res.status(404);
