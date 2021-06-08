@@ -108,7 +108,12 @@ function bindSubmitButton(){
                 let insertId = response.insertId;//for deletion
                 let table = document.getElementById("customerTable");
                 let newRow = table.insertRow(-1);
-                buildTable(response);
+                createTdElem(payload.email, newRow);
+                createTdElem(payload.firstName, newRow);
+                createTdElem(payload.lastName, newRow);
+                createTdElem(payload.phone, newRow);
+                createTdElem(payload.student, newRow);
+                createTdElem(payload.genderRoom, newRow);
                 //Buttons 
 
                 //edit button
@@ -150,7 +155,7 @@ fetchData();
  function buildTable(response){
     const table = document.getElementById('results');
     table.innerHTML = "";
-    const properties = ['customerID', 'email', "firstName", "lastName", "phone", "student", "genderRoom"];
+    const properties = ['email', "firstName", "lastName", "phone", "student", "genderRoom"];
     let row, cell, deleteBtn, editBtn, form;
     for(i = 0; i<response.length; i++) {
        row = document.createElement("tr");
@@ -168,26 +173,35 @@ fetchData();
        cell.textContent = response[i][properties[6]];
        row.appendChild(cell);
         
+       let insertId = response.insertId;//for deletion
+       let table = document.getElementById("customerTable");
+        
  
-       cell = document.createElement("td");
-       form = document.createElement("form");
-       cell.appendChild(form);
-       editBtn = document.createElement("button");
-       editBtn.textContent = "Edit";
-       editBtn.classList.add("editBtn");
-       editBtn.classList.add("btn");
-       editBtn.classList.add("btn-info");
-       editBtn.type = "button";
-       form.appendChild(editBtn);
-       
-       deleteBtn = document.createElement("button");
-       deleteBtn.textContent = "Delete";
-       deleteBtn.classList.add("deleteBtn");
-       deleteBtn.classList.add("btn");
-       deleteBtn.classList.add("btn-danger");
-       deleteBtn.type = "button";
-       form.appendChild(deleteBtn);
- 
+//Buttons 
+
+          //edit button
+                let editData = document.createElement('td');
+        
+                let editBtn = document.createElement('input');
+                editBtn.type="submit";
+                editBtn.value = "Edit";
+                editData.appendChild(editBtn);
+                row.appendChild(editData);
+                
+                //Delete Button
+                let deleteData = document.createElement('td');
+                let deleteBtn = document.createElement('input');
+                deleteBtn.type = "button";
+                deleteBtn.value = "Delete";
+                deleteBtn.onclick = function(){deleteEntry(insertId);};
+
+                let hidden = document.createElement('input');
+                hidden.type = "hidden";
+                hidden.id = "delete" + insertId;
+                
+                deleteData.appendChild(deleteBtn);
+                deleteData.appendChild(hidden);
+                row.appendChild(deleteData);
        table.appendChild(row);
     }
  }
