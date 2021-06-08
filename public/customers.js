@@ -165,7 +165,7 @@ fetchData();
           row.appendChild(cell);
        }
        cell = document.createElement("td");
-       cell.textContent = response[i][properties[5]][0];
+       cell.textContent = response[i][properties[4]][0];
         console.log(response[i][properties[4]]);
        row.appendChild(cell);
        
