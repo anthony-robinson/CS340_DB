@@ -68,6 +68,14 @@ function query(){
           cell.textContent = response[i][properties[j]];
           row.appendChild(cell);
        }
+       cell = document.createElement("td");
+       cell.textContent = response[i][properties[5].data];
+       row.appendChild(cell);
+       
+       cell = document.createElement("td");
+       cell.textContent = response[i][properties[6];
+       row.appendChild(cell);
+        
  
        form = document.createElement("form");
        cell.appendChild(form);
