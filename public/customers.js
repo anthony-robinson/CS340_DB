@@ -159,18 +159,18 @@ fetchData();
     let row, cell, deleteBtn, editBtn, form;
     for(i = 0; i<response.length; i++) {
        row = document.createElement("tr");
-       for(j = 0; j<5; j++) {
+       for(j = 0; j<4; j++) {
           cell = document.createElement("td");
           cell.textContent = response[i][properties[j]];
           row.appendChild(cell);
        }
        cell = document.createElement("td");
        cell.textContent = response[i][properties[5]][0];
-        console.log(response[i][properties[5]]);
+        console.log(response[i][properties[4]]);
        row.appendChild(cell);
        
        cell = document.createElement("td");
-       cell.textContent = response[i][properties[6]];
+       cell.textContent = response[i][properties[5]];
        row.appendChild(cell);
         
        let insertId = response.insertId;//for deletion
