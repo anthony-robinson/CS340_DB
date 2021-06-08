@@ -107,6 +107,7 @@ function bindSubmitButton(){
                 let response = JSON.parse(req.responseText);
                 let insertId = response.insertId;//for deletion
                 let table = document.getElementById("customerTable");
+                let newRow = table.insertRow(-1);
                 buildTable(response);
                 //Buttons 
 
