@@ -1,10 +1,10 @@
-
 const baseURL = '/customers'; // for added code below
 let form = document.getElementById('customersForm'); //for post request
 
 async function fetchData(){
     const res = await fetch(baseURL);
     const data = await res.json(); //returns a promise resolved to a JSON object
+    buildTable(data);
     //waits until request completes
     buildTable(data);
     //return the response/ do something with response data.
@@ -141,4 +141,3 @@ function buildTable(response){
  }
 
  
-

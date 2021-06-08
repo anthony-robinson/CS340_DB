@@ -41,7 +41,7 @@
   <br>
 
   <div class="container">
-    <form>
+    <form id='roomsForm'>
       <div class="row mb-3">
         <label for="roomID" class="col-sm-2 col-form-label">roomID</label>
         <div class="col-sm-3">
@@ -68,67 +68,27 @@
         </div>
       </div>
 
-      <div class="row mb-3">
+      <div class="col-md-4">
         <label for="inputRoomSize" class="col-sm-2 col-form-label">Size</label>
-        <div class="col-sm-3">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosA" id="gridRadios3" value="option1" checked="">
-            <label class="form-check-label" for="gridRadios1">
-              Single
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosA" id="gridRadios3" value="option2">
-            <label class="form-check-label" for="gridRadios2">
-              Double
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosA" id="gridRadios3" value="option3">
-            <label class="form-check-label" for="gridRadios3">
-              Quad
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosA" id="gridRadios3" value="option4">
-            <label class="form-check-label" for="gridRadios4">
-              6-Person
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosA" id="gridRadios3" value="option5">
-            <label class="form-check-label" for="gridRadios5">
-              8-Person
-            </label>
-          </div>
-        </div>
+        <select id="size" class="form-select">
+          <option selected>Choose...</option>
+          <option value='1'>Single</option>
+          <option value='2'>Double</option>
+          <option value='3'>Quad</option>
+          <option value='1'>6-Person</option>
+          <option value='2'>8-Person</option>
+          <option value='3'>Co-Ed</option>
+        </select>
       </div>
 
-      <div class="row mb-3">
-        <label for="inputGender" class="col-sm-2 col-form-label">Gender</label>
-        <div class="col-sm-3">
-          <!-- <input type="text" class="form-control" id="inputGender"> -->
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosB" id="gridRadios2" value="option1" checked="">
-            <label class="form-check-label" for="gridRadios1">
-              Male
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosB" id="gridRadios2" value="option2">
-            <label class="form-check-label" for="gridRadios2">
-              Female
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadiosB" id="gridRadios2" value="option3">
-            <label class="form-check-label" for="gridRadios3">
-              Co-ed
-            </label>
-          </div>
-        </div>
+      <div class="col-md-4">
+        <label for="inputGender" class="form-label">Gender Room</label>
+        <select id="genderRoom" class="form-select">
+          <option selected>Choose...</option>
+          <option value='1'>M</option>
+          <option value='2'>F</option>
+          <option value='3'>Co-Ed</option>
+        </select>
       </div>
 
 
@@ -136,25 +96,21 @@
     </form>
   </div>
 
+  <!-- Table -->
   <div class="container">
-    <div class="row">
-      <div class="col-sm roomCard">
-        <button type="button" class="btn btn-dark">Single</button>
-      </div>
-      <div class="col-sm roomCard">
-        <button type="button" class="btn btn-dark">Double</button>
-      </div>
-      <div class="col-sm roomCard">
-        <button type="button" class="btn btn-dark">Quads</button>
-      </div>
-      <div class="col-sm roomCard">
-        <button type="button" class="btn btn-dark">6-Person</button>
-      </div>
-      <div class="col-sm roomCard">
-        <button type="button" class="btn btn-dark">8-Person</button>
-      </div>
-    </div>
+    <table class="table table-striped" id="roomsTable">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Room Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Size</th>
+          <th scope="col">Room Gender</th>
+        </tr>
+      </thead>
+      <tbody id="roomsTableBody">
+      </tbody>
+    </table>
   </div>
-</body>
-
+  <script src="rooms.js"></script>
 </html>
