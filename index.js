@@ -1,5 +1,4 @@
 const express = require('express');
-//const { nextTick } = require('node:process');
 const app = express();
 const mysql = require('./dbcon.js');
 const port = 52183;
