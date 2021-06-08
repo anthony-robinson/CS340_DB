@@ -62,7 +62,7 @@ function bindSubmitButton(){
         roomSize = document.getElementById('size');
         payload.roomSize = roomSize.options[roomSize.selectedIndex].text.toLowerCase();
         gender = document.getElementById('genderRoom');
-        payload.genderRoom = gender.options[gender.selectedIndex].text.toLowerCase();
+        payload.roomGender = gender.options[gender.selectedIndex].text.toLowerCase();
 
 
         //open post request
