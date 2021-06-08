@@ -49,7 +49,7 @@ app.get('/', function(req,res){
 
 
 /**CUSTOMERS */
-app.get("/customers", function(req, res, next) {
+app.get("/queryCustomers", function(req, res, next) {
     let context = {};
     mysql.pool.query(selectCustomers, function(err, rows){
     if(err){
@@ -63,7 +63,7 @@ app.get("/customers", function(req, res, next) {
 });
 
 
-app.post("/customers", function(req, res, next) {
+app.post("/insertCustomers", function(req, res, next) {
     let body = req.body;
     let data = [[body.email, body.firstName, body.lastName, body.phone, body.student, body.genderRoom]];
     mysql.pool.query(insertCustomers, data, function(err,rows){
@@ -169,3 +169,4 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(port, () => console.log(`listening on port ${port}...`));
+

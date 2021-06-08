@@ -1,4 +1,3 @@
-
 const baseURL = '/customers'; // for added code below
 let form = document.getElementById('customersForm'); //for post request
 
@@ -240,6 +239,3 @@ fetchData();
 //        table.appendChild(row);
 //     }
 //  }
-
-
-
