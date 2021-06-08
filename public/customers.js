@@ -73,7 +73,7 @@ function query(){
        row.appendChild(cell);
        
        cell = document.createElement("td");
-       cell.textContent = response[i][properties[6];
+       cell.textContent = response[i][properties[6]];
        row.appendChild(cell);
         
  
