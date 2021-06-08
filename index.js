@@ -9,9 +9,8 @@ app.use(express.json());
 /**  QUERIES  **/
 
 //Reservations
-const selectReservations = `SELECT reservationID, customerID, bedID, resDate, checkInDate, checkOutDate, nights FROM Reservations;`;
-const insertReservations = `INSERT into Reservations (resDate, checkInDate, checkOutDate, nights) VALUES(?,?,?,?);`
-const deleteReservations = `DELETE FROM Reservations WHERE reservationID = ? AND customerID = ? `;
+const selectReservations = `SELECT * FROM Reservations;`;
+const insertReservations = `INSERT into Reservations (resDate, checkInDate, checkOutDate, nights) VALUES(?);`
 
 //Customers
 const selectCustomers =  `SELECT customerID, email, firstName, lastName, phone, student, genderRoom FROM Customers;`
@@ -20,23 +19,21 @@ const deleteCustomers = `DELETE FROM Customers WHERE customerID = ? AND firstNam
 
 
 //Beds
-const selectBeds =  `SELECT bedID, roomID, bedSize, bedPrice, bedDiscount FROM Beds;`;
-const insertBeds = `INSERT INTO Beds(bedSize, bedPrice, bedDiscount) VALUES(?,?,?);`;
-const deleteBeds = `DELETE FROM Beds WHERE bedID = ? AND roomID = ?;`;
+const selectBeds =  `SELECT * FROM Beds;`;
+const insertBeds = `INSERT INTO Beds(bedSize, bedPrice, bedDiscount) VALUES(?);`;
 
 
 //Rooms
 const selectRooms =  `SELECT * FROM Rooms;`;
 const insertRooms = `INSERT INTO Rooms(roomName, roomPrice, roomDiscount, roomSize, roomGender) VALUES(?);`;
-const deleteRooms = `DELETE FROM Rooms WHERE roomID = ?;`;
 
 //MealsPurchased
 const selectMealsPurchased =  `SELECT mealsPurchasedID, customerID, mealID FROM MealsPurchased;`;
 
 //Meals 
 const selectMeals = `SELECT mealID, meal, capacity FROM Meals;`;
-const insertMeals = `INSERT INTO Meals(meal, capacity) VALUES(?, ?);`;
-const deleteMeals = `DELETE FROM Meals WHERE mealID = ?;`;
+const insertMeals = `INSERT INTO Meals(meal, capacity) VALUES(?);`;
+
 
 
 
@@ -77,53 +74,92 @@ app.post("/customers", function(req, res, next) {
     })
   })
 
-/** BEDS **/
-app.get('/beds', (req,res) =>{
+/**BEDS*/
+app.get("/beds", function(req, res, next) {
     let context = {};
     mysql.pool.query(selectBeds, function(err, rows){
-        if(err){
-            console.log(err);
-            next(err);
-            return;
-        }
-        context.results = JSON.stringify(rows);
-        res.type('json');
-        res.send(context.results)
-    })
-    res.send('/beds');
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.stringify(rows);
+    res.type('json');
+    res.send(context.results);
+  });
 });
 
-/** MEALS */
-app.get('/meals', (req,res) =>{
-    let context = {};
-    mysql.pool.query(selectMeals, function(err, rows){
+
+app.post("/beds", function(req, res, next) {
+    let body = req.body;
+    let data = [[body.roomID, body.bedSize, body.bedPrice, body.bedDiscount]];
+    mysql.pool.query(insertBeds, data, function(err,rows){
         if(err){
-            console.log(err);
             next(err);
             return;
+        }else{
+            let entry = JSON.stringify(rows)
+            res.send(entry)
         }
-        context.results = JSON.stringify(rows);
-        res.type('json');
-        res.send(context.results)
     })
-    res.send('/meals');
+  })
+
+/**MEALS*/
+app.get("/meals", function(req, res, next) {
+    let context = {};
+    mysql.pool.query(selectMeals, function(err, rows){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.stringify(rows);
+    res.type('json');
+    res.send(context.results);
+  });
 });
 
-/** RESERVATIONS **/
-app.get('/reservations', (req,res) =>{
-    let context = {};
-    mysql.pool.query(selectMeals, function(err, rows){
+
+app.post("/meals", function(req, res, next) {
+    let body = req.body;
+    let data = [[body.meal, body.capacity]];
+    mysql.pool.query(insertMeals, data, function(err,rows){
         if(err){
-            console.log(err);
             next(err);
             return;
+        }else{
+            let entry = JSON.stringify(rows)
+            res.send(entry)
         }
-        context.results = JSON.stringify(rows);
-        res.type('json');
-        res.send(context.results)
     })
-    res.send('/reservations');
+  })
+
+/**Reservations*/
+app.get("/reservations", function(req, res, next) {
+    let context = {};
+    mysql.pool.query(selectReservations, function(err, rows){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.stringify(rows);
+    res.type('json');
+    res.send(context.results);
+  });
 });
+
+
+app.post("/reservations", function(req, res, next) {
+    let body = req.body;
+    let data = [[body.customerID, body.bedID, body.resDate, body.checkInDate, body.checkOutDate, body.nights]];
+    mysql.pool.query(insertReservations, data, function(err,rows){
+        if(err){
+            next(err);
+            return;
+        }else{
+            let entry = JSON.stringify(rows)
+            res.send(entry)
+        }
+    })
+  })
 
 /** MEALS PURCHASED**/
 app.get('/meals_purchased', (req,res) =>{
