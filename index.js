@@ -50,7 +50,7 @@ app.get('/', function(req,res){
 
 
 /**CUSTOMERS */
-app.get("/customers", function(req, res, next) {
+app.get("/query", function(req, res, next) {
     let context = {};
     mysql.pool.query(selectCustomers, function(err, rows){
     if(err){
