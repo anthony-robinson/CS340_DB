@@ -58,7 +58,7 @@ function bindSubmitButton(){
         };
         payload.roomName = document.getElementById('inputName').value;
         payload.roomPrice = document.getElementById('inputRoomPrice').value;
-        payload.roomDiscount = document.getElementById('inputRoomDiscount').value;
+        payload.roomDiscount = document.getElementById('inputDiscount').value;
         roomSize = document.getElementById('inputRoomSize');
         payload.roomSize = roomSize.options[roomSize.selectedIndex].text.toLowerCase();
         gender = document.getElementById('inputGender');
@@ -80,30 +80,7 @@ function bindSubmitButton(){
                 createTdElem(payload.roomDiscount, newRow);
                 createTdElem(payload.roomSize, newRow);
                 createTdElem(payload.genderRoom, newRow);
-                //Buttons 
 
-                //edit button
-                let editData = document.createElement('td');
-        
-                let editBtn = document.createElement('input');
-                editBtn.type="submit";
-                editBtn.value = "Edit";
-                editData.appendChild(editBtn);
-                newRow.appendChild(editData);
-                
-                //Delete Button
-                let deleteData = document.createElement('td');
-                let deleteBtn = document.createElement('input');
-                deleteBtn.type = "button";
-                deleteBtn.value = "Delete";
-                deleteBtn.onclick = function(){deleteEntry(insertId);};
-
-                let hidden = document.createElement('input');
-                hidden.type = "hidden";
-                hidden.id = "delete" + insertId;
-                
-                deleteData.appendChild(deleteBtn);
-                deleteData.appendChild(hidden);
                 newRow.appendChild(deleteData);
             }
         })
