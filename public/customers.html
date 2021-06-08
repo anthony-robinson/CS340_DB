@@ -5,7 +5,6 @@
 <head>
   <meta charset="utf-8">
   <title>DBLink Hostel: Customers</title>
-  <script src="customers.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link rel='stylesheet' href="style.css">
@@ -42,7 +41,7 @@
 
   <!-- Form  -->
   <div class="container">
-    <form class="row g-3" id="customersForm">
+    <form class="row g-3">
       <div class="col-sm-6">
         <label for="inputName1" class="form-label">First Name</label>
         <input type="name" class="form-control" id="inputName1">
@@ -63,12 +62,12 @@
       </div>
 
       <div class="col-md-4">
-        <label for="inputState" class="form-label">Gender Room</label>
-        <select id="inputState" class="form-select">
+        <label for="inputGender" class="form-label">Gender Room</label>
+        <select id="inputGender" class="form-select">
           <option selected>Choose...</option>
-          <option>M</option>
-          <option>F</option>
-          <option>Co-Ed</option>
+          <option value='1'>M</option>
+          <option value='2'>F</option>
+          <option value='3'>Co-Ed</option>
         </select>
       </div>
 
@@ -82,14 +81,14 @@
       </div>
 
       <div class="col-12">
-        <button type="submit" class="btn btn-primary">Add Guest</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Add Guest</button>
       </div>
     </form>
   </div>
 
   <!-- Table -->
   <div class="container">
-    <table class="table table-striped" id="customerTable">
+    <table class="table table-striped">
       <thead class="thead-light">
         <tr>
           <th scope="col">customerID</th>
@@ -101,46 +100,12 @@
           <th scope="col">Gender</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td> John</td>
-          <td> Smith</td>
-          <td> jsmith@dblink182.com</td>
-          <td> 555-555-5555 </td>
-          <td> Yes</td>
-          <td> M</td>
-          <td><button type="submit" class="btn btn-primary btn-sm">Edit</button></td>
-          <td><button type="submit" class="btn btn-danger btn-sm">Delete</button></td>
-        </tr>
-
-        <tr>
-          <th scope="row">2</th>
-          <td> Susy</td>
-          <td> Smith</td>
-          <td> suzysmith@dblink182.com</td>
-          <td> 555-555-9555 </td>
-          <td> No</td>
-          <td> F</td>
-          <td><button type="submit" class="btn btn-primary btn-sm">Edit</button></td>
-          <td><button type="submit" class="btn btn-danger btn-sm">Delete</button></td>
-        </tr>
-
-        <tr>
-          <th scope="row">3</th>
-          <td> April</td>
-          <td> Lee</td>
-          <td> aLee203@dblink182.com</td>
-          <td> 555-123-4567 </td>
-          <td> Yes</td>
-          <td> F</td>
-          <td><button type="submit" class="btn btn-primary btn-sm">Edit</button></td>
-          <td><button type="submit" class="btn btn-danger btn-sm">Delete</button></td>
-        </tr>
+      <tbody id=results>
       </tbody>
     </table>
   </div>
 
 </body>
-
+<script src="customers.js"></script>
 </html>
+
