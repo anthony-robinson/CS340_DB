@@ -80,8 +80,6 @@ function bindSubmitButton(){
                 createTdElem(payload.roomDiscount, newRow);
                 createTdElem(payload.roomSize, newRow);
                 createTdElem(payload.genderRoom, newRow);
-
-                newRow.appendChild(deleteData);
             }
         })
         req.send(JSON.stringify(payload));
