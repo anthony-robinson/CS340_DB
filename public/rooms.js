@@ -96,7 +96,7 @@ fetchData();
 
 
  function buildTable(response){
-    const table = document.getElementById('roomsTable');
+    const table = document.getElementById('roomsTableBody');
     table.innerHTML = "";
     const properties = ['roomName', "roomPrice", "roomDiscount", "roomSize", "roomGender", "genderRoom"];
     let row, cell, deleteBtn, editBtn, form;
