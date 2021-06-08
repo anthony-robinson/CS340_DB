@@ -130,36 +130,7 @@ fetchData();
           cell.textContent = response[i][properties[j]];
           row.appendChild(cell);
        }
-        
-       let insertId = response.insertId;//for deletion
-       let table = document.getElementById("customerTable");
-        
- 
-        //Buttons 
 
-          //edit button
-        let editData = document.createElement('td');
-        
-        let editBtn = document.createElement('input');
-        editBtn.type="submit";
-        editBtn.value = "Edit";
-        editData.appendChild(editBtn);
-        row.appendChild(editData);
-                
-        //Delete Button
-        let deleteData = document.createElement('td');
-        let deleteBtn = document.createElement('input');
-        deleteBtn.type = "button";
-        deleteBtn.value = "Delete";
-        deleteBtn.onclick = function(){deleteEntry(insertId);};
-
-        let hidden = document.createElement('input');
-        hidden.type = "hidden";
-        hidden.id = "delete" + i;
-                
-        deleteData.appendChild(deleteBtn);
-        deleteData.appendChild(hidden);
-        row.appendChild(deleteData);
         table.appendChild(row);
     }
  }
