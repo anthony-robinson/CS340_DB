@@ -62,7 +62,7 @@ function bindSubmitButton(){
         payload.resDate = document.getElementById('inputResDate').value;
         payload.checkIn = document.getElementById('inputCheckInDate').value;
         payload.checkOut = document.getElementById('inputCheckOutDate').value;
-        payload.nights = document.getElementById('nights').value;
+        payload.nights = document.getElementById('inputNights').value;
 
 
 
