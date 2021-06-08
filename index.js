@@ -16,7 +16,7 @@ const deleteReservations = `DELETE FROM Reservations WHERE reservationID = ? AND
 
 //Customers
 const selectCustomers =  `SELECT customerID, email, firstName, lastName, phone, student, genderRoom FROM Customers;`
-const insertCustomers = `INSERT INTO Customers (email, firstName, lastName, phone, student, genderRoom) VALUES(?,?,?,?,?,?);`;
+const insertCustomers = `INSERT INTO Customers (email, firstName, lastName, phone, student, genderRoom) VALUES(?);`;
 const deleteCustomers = `DELETE FROM Customers WHERE customerID = ? AND firstName = ? AND lastName = ?;`;
 
 
