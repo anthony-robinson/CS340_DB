@@ -23,7 +23,7 @@ document.getElementById('submitBtn').addEventListener('click', function(event){
     console.log(student);
     console.log(genderRoom);
  
-    req.open('POST', '/insert', true);
+    req.open('POST', '/insertCustomers', true);
     req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     req.addEventListener('load',function(){
        if(req.status >= 200 && req.status < 400){
@@ -42,10 +42,9 @@ document.getElementById('submitBtn').addEventListener('click', function(event){
     );
  });
 
-//reads the query for the customer page
 function query(){
     let req = new XMLHttpRequest();
-    req.open('GET', '/query', true);
+    req.open('GET', '/queryCustomers', true);
     req.addEventListener('load',function(){
        if(req.status >= 200 && req.status < 400){
           const response = JSON.parse(req.responseText);
@@ -95,4 +94,3 @@ function query(){
  document.addEventListener("DOMContentLoaded", function() {
     query();
   });
-
