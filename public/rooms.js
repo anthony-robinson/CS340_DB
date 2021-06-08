@@ -4,7 +4,7 @@ let form = document.getElementById('roomsForm'); //for post reques
 
 /** ANTHONY's ADDED CODE */
 async function fetchData(){
-    const res = await fetch(baseURL);
+    const res = await fetch("/rooms");
     const data = await res.json(); //returns a promise resolved to a JSON object
     buildTable(data);
     //waits until request completes
