@@ -59,9 +59,9 @@ function bindSubmitButton(){
         payload.roomName = document.getElementById('inputName').value;
         payload.roomPrice = document.getElementById('inputRoomPrice').value;
         payload.roomDiscount = document.getElementById('inputDiscount').value;
-        roomSize = document.getElementById('genderRoom');
+        roomSize = document.getElementById('size');
         payload.roomSize = roomSize.options[roomSize.selectedIndex].text.toLowerCase();
-        gender = document.getElementById('inputGender');
+        gender = document.getElementById('genderRoom');
         payload.genderRoom = gender.options[gender.selectedIndex].text.toLowerCase();
 
 
