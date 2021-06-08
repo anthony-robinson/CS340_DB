@@ -2,6 +2,7 @@
 const baseURL = '/customers'; // for added code below
 let form = document.getElementById('customersForm'); //for post request
 
+
 // module.exports = function(){
 //     var express = require('express');
 //     var router = express.Router();
@@ -40,8 +41,9 @@ async function fetchData(){
     const res = await fetch(baseURL);
     const data = await res.json(); //returns a promise resolved to a JSON object
     //waits until request completes
+    buildTable(data);
     //return the response/ do something with response data.
-    return res;
+    //return res;
 }
 
 //For populating new table
@@ -96,55 +98,19 @@ function bindSubmitButton(){
         payload.student = document.getElementById('student').value;
         gender = document.getElementById('genderRoom');
         payload.genderRoom = gender.options[gender.selectedIndex].text.toLowerCase();
-
-
         //open post request
         req.open('POST', baseURL, true);
         req.setRequestHeader('Content-Type','application/json');
         req.addEventListener('load', function(){
             if(req.status >= 200 && req.status <= 400){
-                //add to table on load
-                let response = JSON.parse(req.responseText);
-                let insertId = response.insertId;//for deletion
-                let table = document.getElementById("customerTable");
-                let newRow = table.insertRow(-1);
-
-                createTdElem(payload.email, newRow);
-                createTdElem(payload.firstName, newRow);
-                createTdElem(payload.lastName, newRow);
-                createTdElem(payload.phone, newRow);
-                createTdElem(payload.student, newRow);
-                createTdElem(payload.genderRoom, newRow);
-
-                //Buttons 
-
-                //edit button
-                let editData = document.createElement('td');
-        
-                let editBtn = document.createElement('input');
-                editBtn.type="submit";
-                editBtn.value = "Edit";
-                editData.appendChild(editBtn);
-                newRow.appendChild(editData);
-                
-                //Delete Button
-                let deleteData = document.createElement('td');
-                let deleteBtn = document.createElement('input');
-                deleteBtn.type = "button";
-                deleteBtn.value = "Delete";
-                deleteBtn.onclick = function(){deleteEntry(insertId);};
-
-                let hidden = document.createElement('input');
-                hidden.type = "hidden";
-                hidden.id = "delete" + insertId;
-                
-                deleteData.appendChild(deleteBtn);
-                deleteData.appendChild(hidden);
-                newRow.appendChild(deleteData);
+                //create table on successful load
+                console.log("success");
+                fetchData();
+            }else{
+                console.log("failure " + req.statusText);
             }
         })
         req.send(JSON.stringify(payload));
-
         
     })
 }
@@ -154,92 +120,60 @@ document.addEventListener('DOMContentLoaded', bindSubmitButton);
 fetchData();
 
 
-// document.getElementById('submitBtn').addEventListener('click', function(event){
-//     event.preventDefault();
-//     const firstName = document.getElementById('inputName1').value;
-//     const lastName = document.getElementById('inputName2').value;
-//     const email = document.getElementById('inputEmail').value;
-//     const phone = document.getElementById('inputNumber').value;
-//     var student = document.getElementById('gridCheck');
-//     var genderRoom = document.getElementById('inputGender').value;
 
-//     //checking if student is false
-//     if (student.checked){
-//         student = 1
-//     } else {
-//         student = 0
-//     }
+function buildTable(response){
+    let table = document.getElementById("customerTable");
 
-
-//     let req = new XMLHttpRequest();
+    const properties = ['email', "firstName", "lastName", "phone", "student", "genderRoom"];
+    let row, cell, deleteBtn, editBtn, form;
+    let createdTableBody;
+    //clear table
+    if(document.querySelector("tbody") !== null){
+        table.removeChild(document.querySelector("tbody"));
+    }
+    createdTableBody = document.createElement("tbody");
+    for(i = 0; i<response.length; i++) {
+       row = document.createElement("tr");
+       for(j= 0; j < properties.length; j++){
+        cell = document.createElement("td");
+        cell.appendChild(document.createTextNode(response[i][properties[j]]));
+        row.appendChild(cell);
+    };
+       createdTableBody.appendChild(row);
+        
+       let insertId = response.insertId;//for deletion
  
-//     req.open('POST', '/insert', true);
-//     req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     req.addEventListener('load',function(){
-//        if(req.status >= 200 && req.status < 400){
-//           console.log("Insert done.");
-//           document.getElementById('addForm').reset();
-//           query();
-//        }});
+        //Buttons 
+
+        //edit button
+        let editData = document.createElement('td');
+
+        let editBtn = document.createElement('input');
+        editBtn.type="submit";
+        editBtn.value = "Edit";
+        editData.appendChild(editBtn);
+        row.appendChild(editData);
+        createdTableBody.appendChild(row);
+        
+        //Delete Button
+        let deleteData = document.createElement('td');
+        let deleteBtn = document.createElement('input');
+        deleteBtn.type = "button";
+        deleteBtn.value = "Delete";
+        deleteBtn.onclick = function(){deleteEntry(insertId);};
+
+        let hidden = document.createElement('input');
+        hidden.type = "hidden";
+        hidden.id = "delete" + i;
+        
+        deleteData.appendChild(deleteBtn);
+        deleteData.appendChild(hidden);
+        row.appendChild(deleteData);
+        createdTableBody.appendChild(row);
+        
+    }
+    table.appendChild(createdTableBody);
+ }
+
  
-//     req.send(
-//        'firstName=' + firstName + '&' +
-//        'lastName=' + lastName + '&' +
-//        'email=' + email + '&' +
-//        'phone=' + phone + '&' +
-//        'student=' + student + '&' +
-//        'genderRoom=' + genderRoom
-//     );
-//  });
-
-// function query(){
-//     let req = new XMLHttpRequest();
-//     req.open('GET', '/query', true);
-//     req.addEventListener('load',function(){
-//        if(req.status >= 200 && req.status < 400){
-//           const response = JSON.parse(req.responseText);
-//           console.log(response);
-//           buildTable(response);
-//        } else {
-//           console.log(req.statusText);
-//     }});
-//     req.send(null);
-//  }
-
-//  function buildTable(response){
-//     const table = document.getElementById('results');
-//     table.innerHTML = "";
-//     const properties = ['customerID', 'email', "firstName", "lastName", "phone", "student", "genderRoom"];
-//     let row, cell, deleteBtn, editBtn, form;
-//     for(i = 0; i<response.length; i++) {
-//        row = document.createElement("tr");
-//        for(j = 0; j<6; j++) {
-//           cell = document.createElement("td");
-//           cell.textContent = response[i][properties[j]];
-//           row.appendChild(cell);
-//        }
- 
-//        form = document.createElement("form");
-//        cell.appendChild(form);
-//        editBtn = document.createElement("button");
-//        editBtn.textContent = "Edit";
-//        editBtn.classList.add("editBtn");
-//        editBtn.classList.add("btn");
-//        editBtn.classList.add("btn-info");
-//        editBtn.type = "button";
-//        form.appendChild(editBtn);
-       
-//        deleteBtn = document.createElement("button");
-//        deleteBtn.textContent = "Delete";
-//        deleteBtn.classList.add("deleteBtn");
-//        deleteBtn.classList.add("btn");
-//        deleteBtn.classList.add("btn-danger");
-//        deleteBtn.type = "button";
-//        form.appendChild(deleteBtn);
- 
-//        table.appendChild(row);
-//     }
-//  }
-
-
 
