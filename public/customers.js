@@ -69,7 +69,7 @@ function query(){
           row.appendChild(cell);
        }
        cell = document.createElement("td");
-       cell.textContent = response[i][properties[5].data];
+       cell.textContent = response[i][properties[5][0].data;
        row.appendChild(cell);
        
        cell = document.createElement("td");
@@ -77,6 +77,7 @@ function query(){
        row.appendChild(cell);
         
  
+       cell = document.createElement("td");
        form = document.createElement("form");
        cell.appendChild(form);
        editBtn = document.createElement("button");
