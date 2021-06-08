@@ -1,4 +1,3 @@
-
 document.getElementById('submitBtn').addEventListener('click', function(event){
     event.preventDefault();
     const firstName = document.getElementById('inputName1').value;
@@ -17,6 +16,12 @@ document.getElementById('submitBtn').addEventListener('click', function(event){
 
 
     let req = new XMLHttpRequest();
+    console.log(firstName);
+    console.log(lastName);
+    console.log(email);
+    console.log(phone);
+    console.log(student);
+    console.log(genderRoom);
  
     req.open('POST', '/insert', true);
     req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -37,6 +42,7 @@ document.getElementById('submitBtn').addEventListener('click', function(event){
     );
  });
 
+//reads the query for the customer page
 function query(){
     let req = new XMLHttpRequest();
     req.open('GET', '/query', true);
@@ -86,4 +92,7 @@ function query(){
     }
  }
 
+ document.addEventListener("DOMContentLoaded", function() {
+    query();
+  });
 
