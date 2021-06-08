@@ -119,7 +119,7 @@ fetchData();
 
 
  function buildTable(response){
-    const table = document.getElementById('results');
+    const table = document.getElementById('roomsTable');
     table.innerHTML = "";
     const properties = ['roomName', "roomPrice", "roomDiscount", "roomSize", "roomGender", "genderRoom"];
     let row, cell, deleteBtn, editBtn, form;
