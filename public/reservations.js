@@ -99,7 +99,7 @@ fetchData();
  function buildTable(response){
     const table = document.getElementById('reservations');
     table.innerHTML = "";
-    const properties = ['customerID', "bedID", "resDate", "checkInDate", "checkOutDate", "ngihts"];
+    const properties = ['customerID', "bedID", "resDate", "checkInDate", "checkOutDate", "nights"];
     let row, cell, deleteBtn, editBtn, form;
     for(i = 0; i<response.length; i++) {
        row = document.createElement("tr");
