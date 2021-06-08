@@ -6,6 +6,7 @@ let form = document.getElementById('resForm'); //for post reques
 async function fetchData(){
     const res = await fetch("/reservations");
     const data = await res.json(); //returns a promise resolved to a JSON object
+    console.log(data);
     buildTable(data);
     //waits until request completes
     //return the response/ do something with response data.
