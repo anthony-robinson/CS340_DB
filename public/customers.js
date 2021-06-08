@@ -28,7 +28,6 @@ document.getElementById('submitBtn').addEventListener('click', function(event){
     req.addEventListener('load',function(){
        if(req.status >= 200 && req.status < 400){
           console.log("Insert done.");
-          document.getElementById('addForm').reset();
           query();
        }});
  
